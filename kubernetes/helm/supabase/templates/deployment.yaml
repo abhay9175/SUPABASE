@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supabase
+  template:
+    metadata:
+      labels:
+        app: supabase
+    spec:
+      containers:
+      - name: postgrest
+        image: supabase/postgrest:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PGRST_DB_URI
+          value: "postgres://supabase_user:supabase_pass@<postgresql-service-name>:5432/supabase_db"
+        - name: PGRST_DB_SCHEMA
+          value: "public"
+        - name: PGRST_DB_ANON_ROLE
+          value: "anon"
+      - name: gotrue
+        image: supabase/gotrue:latest
+        ports:
+        - containerPort: 9999
+        env:
+        - name: GOTRUE_DB_URI
+          value: "postgres://supabase_user:supabase_pass@<postgresql-service-name>:5432/supabase_db"
+      - name: realtime
+        image: supabase/realtime:latest
+        ports:
+        - containerPort: 4000
+        env:
+        - name: DB_HOST
+          value: "<postgresql-service-name>"
+      - name: storage
+        image: supabase/storage-api:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: SUPABASE_URL
+          value: "http://localhost:3000"
+

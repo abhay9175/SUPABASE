@@ -1,0 +1,23 @@
+postgresql:
+  postgresqlUsername: supabase_user
+  postgresqlPassword: supabase_pass
+  postgresqlDatabase: supabase_db
+
+realtime:
+  enabled: true
+
+auth:
+  enabled: true
+
+storage:
+  enabled: true
+
+rest:
+  enabled: true
+
+global:
+  postgresql:
+    postgresqlDatabase: supabase_db
+    postgresqlUsername: supabase_user
+    postgresqlPassword: supabase_pass
+

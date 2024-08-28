@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase
+spec:
+  type: LoadBalancer
+  selector:
+    app: supabase
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+    name: http
+  - protocol: TCP
+    port: 9999
+    targetPort: 9999
+    name: auth
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
+    name: realtime
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    name: storage
+
