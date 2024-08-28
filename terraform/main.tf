@@ -17,12 +17,12 @@ module "vpc" {
   single_nat_gateway = true
 }
 
-module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "supabase-cluster"
-  cluster_version = "1.24"
-  subnets         = module.vpc.private_subnets
-  vpc_id          = module.vpc.vpc_id
-  manage_aws_auth = true
-}
+#module "eks" {
+#  source          = "terraform-aws-modules/eks/aws"
+#  cluster_name    = "supabase-cluster"
+#  cluster_version = "1.24"
+#  subnets         = module.vpc.private_subnets
+#  vpc_id          = module.vpc.vpc_id
+#  manage_aws_auth = true
+#}
 
