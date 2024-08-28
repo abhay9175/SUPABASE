@@ -5,7 +5,7 @@ provider "aws" {
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.10.0"
-  
+
   name = "supabase-vpc"
   cidr = "10.0.0.0/16"
 
@@ -19,10 +19,19 @@ module "vpc" {
 
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "17.24.0" # Or the latest supported version for your Terraform version
   cluster_name    = "supabase-cluster"
   cluster_version = "1.24"
   subnets         = module.vpc.private_subnets
   vpc_id          = module.vpc.vpc_id
   manage_aws_auth = true
-}
 
+  node_groups = {
+    eks_nodes = {
+      desired_capacity = 2
+      max_capacity     = 3
+      min_capacity     = 1
+      instance_type    = "t3.medium"
+    }
+  }
+}
