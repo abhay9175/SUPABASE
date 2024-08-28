@@ -1,0 +1,20 @@
+global:
+  postgresql:
+    postgresqlDatabase: supabase_db
+    postgresqlUsername: supabase_user
+    postgresqlPassword: supabase_pass
+
+services:
+  auth:
+    enabled: true
+  storage:
+    enabled: true
+  realtime:
+    enabled: true
+  rest:
+    enabled: true
+
+postgresql:
+  persistence:
+    storageClass: ebs-sc
+    size: 10Gi
