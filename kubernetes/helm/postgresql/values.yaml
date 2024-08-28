@@ -1,0 +1,10 @@
+global:
+  postgresql:
+    postgresqlUsername: supabase_user
+    postgresqlPassword: supabase_pass
+    postgresqlDatabase: supabase_db
+
+persistence:
+  storageClass: ebs-sc
+  size: 10Gi
+
